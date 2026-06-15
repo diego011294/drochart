@@ -64,7 +64,7 @@ export default function About() {
                   <ArrowDownToLine className="w-4 h-4 text-brand transition-transform group-hover:translate-y-0.5" />
                   Descargar CV
                   <span className="ml-auto text-[10px] tracking-widest uppercase text-white/40">
-                    PDFS
+                    PDF
                   </span>
                 </a>
               </div>
