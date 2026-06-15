@@ -285,7 +285,7 @@ useEffect(() => {
           >
             <div className="bg-gray-100 rounded-lg w-16 h-16 flex items-center justify-center overflow-hidden flex-shrink-0">
               <img
-                src="/img/Slot2.png"
+                src="/img/slot2.png"
                 className="w-10 object-cover rounded-lg group-hover:scale-110 transition-transform duration-300"
               />
             </div>
@@ -304,7 +304,7 @@ useEffect(() => {
           >
             <div className="bg-gray-100 rounded-lg w-16 h-16 flex items-center justify-center overflow-hidden flex-shrink-0">
               <img
-                src="/img/Slot3.png"
+                src="/img/slot3.png"
                 className="w-10 object-cover rounded-lg group-hover:scale-110 transition-transform duration-300"
               />
             </div>
@@ -325,7 +325,7 @@ useEffect(() => {
           >
             <div className="bg-gray-100 rounded-lg w-16 h-16 flex items-center justify-center overflow-hidden flex-shrink-0">
               <img
-                src="/img/Slot4.png"
+                src="/img/slot4.png"
                 className="w-10 object-cover rounded-lg group-hover:scale-110 transition-transform duration-300"
               />
             </div>
@@ -344,7 +344,7 @@ useEffect(() => {
           >
             <div className="bg-gray-100 rounded-lg w-16 h-16 flex items-center justify-center overflow-hidden flex-shrink-0">
               <img
-                src="/img/Slot5.png"
+                src="/img/slot5.png"
                 className="w-10 object-cover rounded-lg group-hover:scale-110 transition-transform duration-300"
               />
             </div>
@@ -363,7 +363,7 @@ useEffect(() => {
           >
             <div className="bg-gray-100 rounded-lg w-16 h-16 flex items-center justify-center overflow-hidden flex-shrink-0">
               <img
-                src="/img/Slot1.png"
+                src="/img/slot1.png"
                 className="w-10 object-cover rounded-lg group-hover:scale-110 transition-transform duration-300"
               />
             </div>
