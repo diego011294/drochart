@@ -56,7 +56,7 @@ function BottomBar() {
         </div>
 
         <p className="absolute left-1/2 -translate-x-1/2 text-tipoclara font-light whitespace-nowrap pointer-events-none">
-          Diseños y desarrollo
+          Diseño y desarrollo
           <span className="font-extrabold text-tipo"> DROCH</span>
           <span className="art text-tipo">.Art</span>
           <span className="text-tipoclara"> | 2026</span>
