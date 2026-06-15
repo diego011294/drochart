@@ -5,7 +5,7 @@ import gsap from "gsap";
 
 export default function MorphingBlobResponsive() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const rafRef = useRef<number>();
+  const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current!;
