@@ -8,7 +8,7 @@ export default function Proyectos() {
       title: "DOBLEUVE ARTESANÍA",
       subtitle: "Branding | Desarrollo web | Ecommerce",
       image: "/img/dobleuve1.png",
-      logo: "/img/logodobleuve.svg",
+      logo: "/img/logo-doblev.svg",
       tag: "PRODUCCIÓN",
       url: "https://dobleuveartesania.es/"
     },
