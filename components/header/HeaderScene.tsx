@@ -140,7 +140,7 @@ export default function HeaderScene() {
   return (
     <div className="absolute inset-0 z-20 pointer-events-none">
       <Canvas
-        frameloop="demand"
+        frameloop="always"
         resize={{ scroll: false }}
         camera={{ position: [0, 0, 7], fov: 45 }}
         dpr={1}
