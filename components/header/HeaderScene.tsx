@@ -140,10 +140,10 @@ export default function HeaderScene() {
   return (
     <div className="absolute inset-0 z-20 pointer-events-none">
       <Canvas
-        frameloop="always"
+        frameloop="demand"
         resize={{ scroll: false }}
         camera={{ position: [0, 0, 7], fov: 45 }}
-        dpr={isMobile ? [1.5, 2] : [1, 2]}
+        dpr={1}
         gl={{ antialias: false }}
         eventSource={
           typeof document !== "undefined" ? document.body : undefined
