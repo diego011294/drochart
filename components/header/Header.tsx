@@ -103,7 +103,7 @@ export default function Header() {
 
       // 🔥 video entra primero
       .to(video, {
-        scale: 1,
+        scale: 1.015,
         borderRadius: "24px",
         duration: 1.05,
         ease: "power3.inOut",
