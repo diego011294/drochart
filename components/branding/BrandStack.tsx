@@ -57,7 +57,7 @@ export default function BrandStack({ brands }: Props) {
         <div
           key={i}
           className="
-            md:sticky md:top-0 md:h-screen
+            md:sticky md:top-14 md:h-[calc(100vh-56px)]
             flex items-center justify-center
             mb-10 md:mb-0
           "
