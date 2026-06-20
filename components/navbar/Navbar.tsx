@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
+import { useRouter, usePathname } from "next/navigation";
 import gsap from "gsap";
 import Link from "next/link";
 import ModalForm from "../modalform/ModalForm";
@@ -10,6 +11,8 @@ export default function Navbar() {
   const [open, setOpen] = useState(false); // menú móvil
   const [servicesOpen, setServicesOpen] = useState(false); // panel fullscreen
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -106,6 +109,14 @@ useEffect(() => {
      SCROLL SUAVE
   ───────────────────────────────────────────────── */
   const handleScrollTo = (id: string) => {
+  setOpen(false);
+  setServicesOpen(false);
+
+  if (pathname !== "/") {
+    router.push(`/#${id}`);
+    return;
+  }
+
   const el = document.getElementById(id);
   if (!el) return;
 
@@ -117,22 +128,24 @@ useEffect(() => {
     top: y,
     behavior: "smooth",
   });
-
-  setOpen(false);
-  setServicesOpen(false);
-  };
+};
   /* ────────────────────────────────────────────────
    ABRIR SERVICIO
 ──────────────────────────────────────────────── */
- const handleOpenService = (service: string) => {
+const handleOpenService = (service: string) => {
+  setOpen(false);
+  setServicesOpen(false);
+
+  if (pathname !== "/") {
+    router.push(`/?service=${service}`);
+    return;
+  }
+
   window.dispatchEvent(
     new CustomEvent("open-service", {
       detail: service,
     })
   );
-
-  setOpen(false);
-  setServicesOpen(false);
 };
 
   return (

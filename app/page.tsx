@@ -8,11 +8,37 @@ import ModalForm from "@/components/modalform/ModalForm";
 import Proyectos from "@/components/proyectos/Proyectos";
 import Servicios from "@/components/servicios/Servicios";
 import { useState } from "react";
+import {useEffect} from "react";
+import { useSearchParams } from "next/navigation";
 import Ilustracion from "@/components/ilustracion/Ilustracion";
 
 export default function Home() {
   const [modalFormOpen, setModalFormOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<string | null>(null);
+  const searchParams = useSearchParams();
+
+   useEffect(() => {
+    const service = searchParams.get("service");
+    if (!service) return;
+
+    window.dispatchEvent(
+      new CustomEvent("open-service", {
+        detail: service,
+      })
+    );
+  }, [searchParams]);
+
+  useEffect(() => {
+    const hash = window.location.hash.replace("#", "");
+    if (!hash) return;
+
+    const el = document.getElementById(hash);
+    if (el) {
+      setTimeout(() => {
+        el.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    }
+  }, []);
 
   return (
     <main className="flex flex-col items-center justify-center w-full gap-5">
