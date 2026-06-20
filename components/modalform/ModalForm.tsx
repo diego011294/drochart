@@ -111,7 +111,6 @@ export default function ModalForm({ isOpen, onClose }: ModalFormProps) {
           onSubmit={handleSubmit}
           className="flex flex-col gap-4 w-full text-xs">
             <input
-              required
               type="text"
               name="website"
               className="hidden"
