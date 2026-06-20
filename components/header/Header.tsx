@@ -171,7 +171,7 @@ export default function Header() {
             muted
             playsInline
             onEnded={handlePreloaderFinish}
-            className="w-full h-full object-contain"
+            className="w-full h-full object-contain mix-blend-multiply"
           >
             <source src="/img/preloader-video.mp4" type="video/mp4" />
           </video>
