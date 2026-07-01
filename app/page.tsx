@@ -1,44 +1,66 @@
 "use client";
+
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import About from "@/components/about/About";
-import BrandCard from "@/components/branding/BrandCard";
 import BrandStack from "@/components/branding/BrandStack";
-import Footer from "@/components/footer/Footer";
 import Header from "@/components/header/Header";
 import ModalForm from "@/components/modalform/ModalForm";
 import Proyectos from "@/components/proyectos/Proyectos";
 import Servicios from "@/components/servicios/Servicios";
-import { useState } from "react";
-import {useEffect} from "react";
-import { useSearchParams } from "next/navigation";
-import Ilustracion from "@/components/ilustracion/Ilustracion";
 
-export default function Home() {
+// 1. Movemos todo el contenido a un componente interno
+function HomeContent() {
   const [modalFormOpen, setModalFormOpen] = useState(false);
-  const [selectedService, setSelectedService] = useState<string | null>(null);
   const searchParams = useSearchParams();
 
-   useEffect(() => {
+  // Manejar el parámetro ?service=xxx
+  useEffect(() => {
     const service = searchParams.get("service");
     if (!service) return;
 
-    window.dispatchEvent(
-      new CustomEvent("open-service", {
-        detail: service,
-      })
-    );
+    const timer = setTimeout(() => {
+      window.dispatchEvent(
+        new CustomEvent("open-service", {
+          detail: service,
+        })
+      );
+    }, 300);
+
+    return () => clearTimeout(timer);
   }, [searchParams]);
 
+  // Manejar el scroll a secciones usando query param ?scrollTo=xxx
   useEffect(() => {
-    const hash = window.location.hash.replace("#", "");
-    if (!hash) return;
+    const scrollTo = searchParams.get("scrollTo");
+    if (!scrollTo) return;
 
-    const el = document.getElementById(hash);
-    if (el) {
-      setTimeout(() => {
-        el.scrollIntoView({ behavior: "smooth" });
+    const tryScroll = () => {
+      const el = document.getElementById(scrollTo);
+      if (el) {
+        setTimeout(() => {
+          const yOffset = -100;
+          const y = el.getBoundingClientRect().top + window.scrollY + yOffset;
+          window.scrollTo({
+            top: y,
+            behavior: "smooth",
+          });
+        }, 200);
+        return true;
+      }
+      return false;
+    };
+
+    if (!tryScroll()) {
+      let attempts = 0;
+      const interval = setInterval(() => {
+        attempts++;
+        if (tryScroll() || attempts > 20) {
+          clearInterval(interval);
+        }
       }, 100);
     }
-  }, []);
+  }, [searchParams]);
 
   return (
     <main className="flex flex-col items-center justify-center w-full gap-5">
@@ -63,7 +85,6 @@ export default function Home() {
               { font: "Lato", size: "15px", weight: "300", spacing: "10%" },
             ],
           },
-          
           {
             title: "DOMUBOX IMPORT",
             description: ["Domubox es una empresa distribuidora de casas modulares, especializada en ofrecer soluciones de vivienda eficientes, modernas y adaptables.", "El logo refleja la idea de simplicidad y modularidad. Sus formas geométricas representan la estructura de una casa tipo “caja”, haciendo referencia directa al concepto de construcción modular. La identidad busca transmitir orden, funcionalidad y modernidad, valores clave de la marca."],
@@ -78,7 +99,6 @@ export default function Home() {
               { font: "Lexend", size: "42px", weight: "700", spacing: "-3%" },
             ],
           },
-
           {
             title: "BIELA COMPETICIÓN",
             description: ["Diseño de identidad visual y creación de personaje para una escudería de rally en Galicia. El proyecto se desarrolló con el objetivo de crear una marca reconocible, dinámica y adaptable tanto a merchandising como a rotulación de competición.", "El logotipo combina un enfoque “character design” con estética racing, utilizando un pistón antropomórfico como elemento principal para transmitir personalidad, cercanía y pasión por el motor. La identidad fue pensada para funcionar en diferentes soportes como camisetas, pegatinas y decoración de carrocería, manteniendo siempre un estilo agresivo, divertido y fácilmente reconocible dentro del entorno del rally."],
@@ -92,7 +112,6 @@ export default function Home() {
               { font: "Bangers", size: "90px", weight: "300", spacing: "0%" },
             ],
           },
-
           {
             title: "FREEZ",
             description: ["Freez es una identidad visual creada para un proyecto ficticio de una heladería desarrollado durante mi etapa de Formación Profesional. El concepto parte de la combinación entre la silueta de un helado derritiéndose y una cereza que aporta personalidad y carácter al conjunto. A través de formas simples y dinámicas, el logotipo busca transmitir diversión, frescura y una imagen desenfadada, alineada con el espíritu de una marca joven y cercana."],
@@ -108,14 +127,21 @@ export default function Home() {
           },
         ]}
       />
-      {/*<Ilustracion />*/}
       <About />
 
-      {/* Modales */}
       <ModalForm
         isOpen={modalFormOpen}
         onClose={() => setModalFormOpen(false)}
       />
     </main>
+  );
+}
+
+// 2. El componente principal exportado envuelve el contenido en Suspense
+export default function Home() {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center h-screen">Cargando...</div>}>
+      <HomeContent />
+    </Suspense>
   );
 }
