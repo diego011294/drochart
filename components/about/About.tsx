@@ -198,6 +198,20 @@ export default function About() {
                 <div className="relative pb-6">
                   <div className="pl-6">
                     <p className="font-semibold text-neutral-800 leading-snug">
+                      Técnico Superior en Desarrollo de Aplicaciones Web
+                    </p>
+                    <div className="flex items-center gap-2 mt-1.5">
+                      <Badge variant="secondary">2022–2024</Badge>
+                      <span className="text-neutral-400 text-xs">
+                        CPR Liceo La Paz
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                {/* Item 2 */}
+                <div className="relative">
+                  <div className="pl-6">
+                    <p className="font-semibold text-neutral-800 leading-snug">
                       Técnico Superior en Gestión de Ventas y Espacios
                       Comerciales
                     </p>
@@ -205,21 +219,6 @@ export default function About() {
                       <Badge variant="secondary">2015–2017</Badge>
                       <span className="text-neutral-400 text-xs">
                         ES Ramón Menéndez Pidal
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Item 2 */}
-                <div className="relative">
-                  <div className="pl-6">
-                    <p className="font-semibold text-neutral-800 leading-snug">
-                      Técnico Superior en Desarrollo de Aplicaciones Web
-                    </p>
-                    <div className="flex items-center gap-2 mt-1.5">
-                      <Badge variant="secondary">2022–2024</Badge>
-                      <span className="text-neutral-400 text-xs">
-                        CPR Liceo La Paz
                       </span>
                     </div>
                   </div>
