@@ -140,7 +140,7 @@ function HomeContent() {
 // 2. El componente principal exportado envuelve el contenido en Suspense
 export default function Home() {
   return (
-    <Suspense fallback={<div className="flex items-center justify-center h-screen">Cargando...</div>}>
+    <Suspense>
       <HomeContent />
     </Suspense>
   );
