@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import About from "@/components/about/About";
 import BrandStack from "@/components/branding/BrandStack";
 import Header from "@/components/header/Header";
@@ -12,7 +12,9 @@ import Servicios from "@/components/servicios/Servicios";
 function HomeContent() {
   const [modalFormOpen, setModalFormOpen] = useState(false);
   const searchParams = useSearchParams();
+  const router = useRouter();
 
+  // Manejar ?service=xxx
   useEffect(() => {
     const service = searchParams.get("service");
     if (!service) return;
@@ -28,6 +30,45 @@ function HomeContent() {
     return () => clearTimeout(timer);
   }, [searchParams]);
 
+  // Manejar ?scrollTo=xxx
+  useEffect(() => {
+    const scrollTo = searchParams.get("scrollTo");
+    if (!scrollTo) return;
+
+    let attempts = 0;
+    const maxAttempts = 30; // 3 segundos máximo
+
+    const tryScroll = () => {
+      const el = document.getElementById(scrollTo);
+      if (el) {
+        setTimeout(() => {
+          const yOffset = -100;
+          const y = el.getBoundingClientRect().top + window.scrollY + yOffset;
+          window.scrollTo({
+            top: y,
+            behavior: "smooth",
+          });
+        }, 150);
+
+        // Limpiar el query parameter para que no se dispare de nuevo
+        router.replace("/", { scroll: false });
+        return true;
+      }
+      return false;
+    };
+
+    // Intentar inmediatamente
+    if (!tryScroll()) {
+      const interval = setInterval(() => {
+        attempts++;
+        if (tryScroll() || attempts >= maxAttempts) {
+          clearInterval(interval);
+        }
+      }, 100);
+    }
+  }, [searchParams, router]);
+
+  // Fallback: manejar hash en la URL (por si acaso)
   useEffect(() => {
     const hash = window.location.hash.replace("#", "");
     if (!hash) return;
