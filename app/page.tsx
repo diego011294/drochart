@@ -7,63 +7,38 @@ import Header from "@/components/header/Header";
 import ModalForm from "@/components/modalform/ModalForm";
 import Proyectos from "@/components/proyectos/Proyectos";
 import Servicios from "@/components/servicios/Servicios";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import {useEffect} from "react";
 import { useSearchParams } from "next/navigation";
+import Ilustracion from "@/components/ilustracion/Ilustracion";
 
 export default function Home() {
   const [modalFormOpen, setModalFormOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<string | null>(null);
   const searchParams = useSearchParams();
 
-  // Manejar el parámetro ?service=xxx
-  useEffect(() => {
+   useEffect(() => {
     const service = searchParams.get("service");
     if (!service) return;
 
-    const timer = setTimeout(() => {
-      window.dispatchEvent(
-        new CustomEvent("open-service", {
-          detail: service,
-        })
-      );
-    }, 300);
-
-    return () => clearTimeout(timer);
+    window.dispatchEvent(
+      new CustomEvent("open-service", {
+        detail: service,
+      })
+    );
   }, [searchParams]);
 
-  // Manejar el scroll a secciones usando query param ?scrollTo=xxx
   useEffect(() => {
-    const scrollTo = searchParams.get("scrollTo");
-    if (!scrollTo) return;
+    const hash = window.location.hash.replace("#", "");
+    if (!hash) return;
 
-    const tryScroll = () => {
-      const el = document.getElementById(scrollTo);
-      if (el) {
-        setTimeout(() => {
-          const yOffset = -100;
-          const y = el.getBoundingClientRect().top + window.scrollY + yOffset;
-          window.scrollTo({
-            top: y,
-            behavior: "smooth",
-          });
-        }, 200);
-        return true;
-      }
-      return false;
-    };
-
-    // Intentar inmediatamente
-    if (!tryScroll()) {
-      // Si no funciona, reintentar cada 100ms hasta 2 segundos
-      let attempts = 0;
-      const interval = setInterval(() => {
-        attempts++;
-        if (tryScroll() || attempts > 20) {
-          clearInterval(interval);
-        }
+    const el = document.getElementById(hash);
+    if (el) {
+      setTimeout(() => {
+        el.scrollIntoView({ behavior: "smooth" });
       }, 100);
     }
-  }, [searchParams]);
+  }, []);
 
   return (
     <main className="flex flex-col items-center justify-center w-full gap-5">
