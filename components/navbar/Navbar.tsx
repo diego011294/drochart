@@ -108,12 +108,13 @@ useEffect(() => {
   /* ────────────────────────────────────────────────
      SCROLL SUAVE
   ───────────────────────────────────────────────── */
-  const handleScrollTo = (id: string) => {
+  const handleScrollTo = async (id: string) => {
   setOpen(false);
   setServicesOpen(false);
 
   if (pathname !== "/") {
-    router.push(`/#${id}`);
+    // scroll: false evita que Next.js haga scroll al top
+    await router.push(`/?scrollTo=${id}`, { scroll: false });
     return;
   }
 
@@ -121,8 +122,7 @@ useEffect(() => {
   if (!el) return;
 
   const yOffset = -100;
-  const y =
-    el.getBoundingClientRect().top + window.scrollY + yOffset;
+  const y = el.getBoundingClientRect().top + window.scrollY + yOffset;
 
   window.scrollTo({
     top: y,
@@ -132,15 +132,17 @@ useEffect(() => {
   /* ────────────────────────────────────────────────
    ABRIR SERVICIO
 ──────────────────────────────────────────────── */
-const handleOpenService = (service: string) => {
+const handleOpenService = async (service: string) => {
   setOpen(false);
   setServicesOpen(false);
 
   if (pathname !== "/") {
-    router.push(`/?service=${service}`);
+    // Navegar con el query parameter
+    await router.push(`/?service=${service}`);
     return;
   }
 
+  // Si ya estamos en home, disparar el evento
   window.dispatchEvent(
     new CustomEvent("open-service", {
       detail: service,
