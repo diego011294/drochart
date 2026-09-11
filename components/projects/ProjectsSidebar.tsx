@@ -109,7 +109,7 @@ export default function ProjectsSidebar({
                     size-[50px]
                     shrink-0
                     overflow-hidden
-                    rounded-md
+                    rounded-lg
                     border-2
                     transition-all
                     duration-300

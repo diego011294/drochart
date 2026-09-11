@@ -5,10 +5,10 @@ import LottieLogo from "@/components/lottielogo/LottieLogo";
 
 // --- Data ---
 const SOCIAL_LINKS = [
-  { label: "Instagram", href: "https://www.instagram.com/droch.art/", },
+  //{ label: "Instagram", href: "https://www.instagram.com/droch.art/", },
   { label: "LinkedIn",  href: "https://www.linkedin.com/in/diego-garcía-rocha" },
-  { label: "GitHub",    href: "https://github.com/diego011294"},
-  { label: "Behance",   href: "https://www.behance.net/droch" },
+  //{ label: "GitHub",    href: "https://github.com/diego011294"},
+  //{ label: "Behance",   href: "https://www.behance.net/droch" },
 ];
 
 const LEGAL_LINKS = [

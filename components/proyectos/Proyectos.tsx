@@ -22,7 +22,7 @@ export default function Proyectos() {
     },
      {
        title: "CENTRO INTERACTÚA",
-       subtitle: "Diseño UI/UX SEO",
+       subtitle: "Diseño UI/UX",
        image: "/img/img-interac.jpg",
        logo: "/img/logo-intera.png",
        tag: "DISEÑO",

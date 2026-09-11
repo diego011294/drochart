@@ -71,7 +71,7 @@ export default function ProjectContent({
 
         {/* HERO */}
 
-        <div className="relative aspect-16/6 w-full overflow-hidden rounded-lg bg-[#d9d9d9]">
+        <div className="relative aspect-11/6 md:aspect-16/6 w-full overflow-hidden rounded-lg bg-[#d9d9d9]">
           <Image
             src={project.heroImage}
             alt={project.title}
