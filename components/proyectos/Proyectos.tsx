@@ -25,7 +25,7 @@ export default function Proyectos() {
        subtitle: "Diseño UI/UX",
        image: "/img/img-interac.jpg",
        logo: "/img/logo-intera.png",
-       tag: "DISEÑO",
+       tag: "MANTENIMIENTO",
        url: "/proyectos/centro-interactua"
      }
   ];
