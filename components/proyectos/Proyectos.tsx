@@ -10,7 +10,7 @@ export default function Proyectos() {
       image: "/img/dobleuve1.png",
       logo: "/img/logo-doblev.svg",
       tag: "PRODUCCIÓN",
-      url: "https://dobleuveartesania.es/"
+      url: "/proyectos/dobleuve-artesania"
     },
     {
       title: "DOMUBOX IMPORT",
@@ -18,8 +18,16 @@ export default function Proyectos() {
       image: "/img/img-domubox.jpg",
       logo: "/img/logo-domu.svg",
       tag: "PRODUCCIÓN",
-      url: "https://www.domuboximport.com/"
-    }
+      url: "/proyectos/domubox-import"
+    },
+     {
+       title: "CENTRO INTERACTÚA",
+       subtitle: "Diseño UI/UX SEO",
+       image: "/img/img-interac.jpg",
+       logo: "/img/logo-intera.png",
+       tag: "DISEÑO",
+       url: "/proyectos/centro-interactua"
+     }
   ];
 
   return (
