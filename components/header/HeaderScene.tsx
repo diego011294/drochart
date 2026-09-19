@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Environment, Float, useGLTF } from "@react-three/drei";
+import { Environment, Float, Lightformer, useGLTF } from "@react-three/drei";
 import { useRef, useMemo, useEffect, useState } from "react";
 import * as THREE from "three";
 
@@ -143,8 +143,11 @@ export default function HeaderScene() {
         frameloop="always"
         resize={{ scroll: false }}
         camera={{ position: [0, 0, 7], fov: 45 }}
-        dpr={isMobile ? [1.5, 2] : [1, 2]}
-        gl={{ antialias: false }}
+        dpr={isMobile ? 1 : [1, 1.5]}
+        gl={{
+          antialias: false,
+          powerPreference: "high-performance",
+        }}
         eventSource={
           typeof document !== "undefined" ? document.body : undefined
         }
@@ -157,7 +160,30 @@ export default function HeaderScene() {
           intensity={isMobile ? 1.2 : 1.6}
         />
 
-        <Environment preset="city" />
+        <Environment
+          resolution={64}
+          frames={1}
+        >
+          <Lightformer
+            intensity={4}
+            position={[5, 5, 5]}
+            scale={[10, 10, 1]}
+            rotation-y={Math.PI / 2}
+          />
+
+          <Lightformer
+            intensity={3}
+            position={[-5, 2, 3]}
+            scale={[5, 5, 1]}
+            rotation-y={-Math.PI / 2}
+          />
+
+          <Lightformer
+            intensity={2}
+            position={[0, -3, 5]}
+            scale={[4, 4, 1]}
+          />
+        </Environment>
 
         <LogoModel config={config} />
       </Canvas>

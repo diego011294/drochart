@@ -14,44 +14,63 @@ export default function Header() {
   const staticContentRef = useRef<HTMLDivElement>(null);
   const bottomSlotRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef<HTMLDivElement>(null);
-  const [loading, setLoading] = useState(true);
 
+  const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
   // ─────────────────────────────
+  // BLOQUEAR / LIBERAR SCROLL
+  // ─────────────────────────────
+  useEffect(() => {
+    const html = document.documentElement;
+    const body = document.body;
+
+    if (loading) {
+      html.style.overflow = "hidden";
+      body.style.overflow = "hidden";
+    } else {
+      html.style.overflow = "";
+      body.style.overflow = "";
+    }
+
+    return () => {
+      html.style.overflow = "";
+      body.style.overflow = "";
+    };
+  }, [loading]);
+
+  // ─────────────────────────────
   // PRELOADER END
   // ─────────────────────────────
   const handlePreloaderFinish = () => {
-    const tl = gsap.timeline();
-
-    // 🔥 primero animas entrada real
+    // Empezamos la animación del header
     startHeaderAnimation();
 
-    // 🔥 luego quitas overlay (evita gap visual)
-    tl.to("#preloader", {
+    // Liberamos el scroll inmediatamente
+    document.documentElement.style.overflow = "";
+    document.body.style.overflow = "";
+
+    // Indicamos que el preloader ha terminado
+    setLoading(false);
+
+    // Ocultamos el preloader
+    gsap.to("#preloader", {
       autoAlpha: 0,
       duration: 0.6,
       ease: "power2.out",
       onComplete: () => {
-      requestAnimationFrame(() => {
-        setLoading(false);
-      });
-    },
+        const preloader = document.getElementById("preloader");
+
+        if (preloader) {
+          preloader.style.pointerEvents = "none";
+          preloader.style.display = "none";
+        }
+      },
     });
   };
-
-  useEffect(() => {
-  if (loading) {
-    document.documentElement.style.overflow = "hidden";
-    document.body.style.overflow = "hidden";
-  } else {
-    document.documentElement.style.overflow = "";
-    document.body.style.overflow = "";
-  }
-}, [loading]);
 
   // ─────────────────────────────
   // HEADER ANIMATION
@@ -64,10 +83,20 @@ export default function Header() {
     const staticContent = staticContentRef.current;
     const bottomSlot = bottomSlotRef.current;
 
-    if (!header || !video || !droch || !art || !staticContent || !bottomSlot)
+    if (
+      !header ||
+      !video ||
+      !droch ||
+      !art ||
+      !staticContent ||
+      !bottomSlot
+    ) {
       return;
+    }
 
-    gsap.set(header, { autoAlpha: 0 });
+    gsap.set(header, {
+      autoAlpha: 0,
+    });
 
     gsap.set(video, {
       scale: 0.12,
@@ -93,7 +122,9 @@ export default function Header() {
     });
 
     const tl = gsap.timeline({
-      defaults: { ease: "power2.out" },
+      defaults: {
+        ease: "power2.out",
+      },
     });
 
     tl.to(header, {
@@ -101,7 +132,7 @@ export default function Header() {
       duration: 0.2,
     })
 
-      // 🔥 video entra primero
+      // Video
       .to(video, {
         scale: 1,
         borderRadius: "24px",
@@ -109,7 +140,7 @@ export default function Header() {
         ease: "power3.inOut",
       })
 
-      // 🔥 3D entra casi en paralelo (sin delay muerto)
+      // 3D
       .to(
         sceneRef.current,
         {
@@ -123,7 +154,7 @@ export default function Header() {
         "-=0.15"
       )
 
-      // 🔥 texto principal
+      // DROCH
       .to(
         droch,
         {
@@ -135,6 +166,7 @@ export default function Header() {
         "-=0.6"
       )
 
+      // .ART
       .to(
         art,
         {
@@ -146,6 +178,7 @@ export default function Header() {
         "-=0.7"
       )
 
+      // Contenido inferior
       .to(
         [staticContent, bottomSlot],
         {
@@ -173,7 +206,10 @@ export default function Header() {
             onEnded={handlePreloaderFinish}
             className="w-full h-full object-contain mix-blend-multiply"
           >
-            <source src="/img/preloader-video.mp4" type="video/mp4" />
+            <source
+              src="/img/preloader-video.mp4"
+              type="video/mp4"
+            />
           </video>
 
           <div className="absolute -inset-1 pointer-events-none bg-linear-to-t from-white via-white/20 to-transparent" />
@@ -188,7 +224,7 @@ export default function Header() {
         <div className="h-16 w-full" />
 
         <div className="relative flex-1 min-h-0 overflow-hidden">
-          {/* 3D SCENE (SIEMPRE MONTADO) */}
+          {/* 3D SCENE */}
           <div
             ref={sceneRef}
             className="absolute inset-0 z-20 pointer-events-none opacity-0"
@@ -205,7 +241,10 @@ export default function Header() {
             playsInline
             className="rounded-3xl z-0 absolute top-0 left-0 w-full p-2 h-full object-cover"
           >
-            <source src="/video/BurbujasHeader.mp4" type="video/mp4" />
+            <source
+              src="/video/BurbujasHeader.mp4"
+              type="video/mp4"
+            />
           </video>
 
           {/* OVERLAY */}
@@ -216,9 +255,17 @@ export default function Header() {
                 ref={staticContentRef}
                 className="flex flex-col sm:flex-row w-full justify-evenly items-end text-sm sm:text-lg sm:gap-5"
               >
-                <span className="font-bold">Diseño UI/UX</span>
-                <h1 className="font-bold">Desarrollo web</h1>
-                <span className="font-bold">Branding</span>
+                <span className="font-bold">
+                  Diseño UI/UX
+                </span>
+
+                <h1 className="font-bold">
+                  Desarrollo web
+                </h1>
+
+                <span className="font-bold">
+                  Branding
+                </span>
               </div>
 
               <div className="flex flex-col items-end -space-y-4 lg:-space-y-10">
@@ -247,10 +294,11 @@ export default function Header() {
             >
               <div className="text-lg md:text-xl lg:text-2xl font-bold w-full md:w-1/3 leading-tight">
                 <p>
-                  Transformo lo complejo en interfaces claras y funcionales,{" "}
+                  Transformo lo complejo en interfaces claras y
+                  funcionales,{" "}
                   <span className="text-tipoclara">
-                    creando experiencias fluidas que guían al usuario y
-                    convierten mejor.
+                    creando experiencias fluidas que guían al usuario
+                    y convierten mejor.
                   </span>
                 </p>
               </div>
@@ -261,12 +309,22 @@ export default function Header() {
                   src="img/yo-small.jpg"
                   alt="Foto carnet"
                 />
+
                 <div className="flex flex-col gap-2">
                   <span className="text-xs text-tipoclara">
                     UI/UX designer | Web developer
                   </span>
-                  <h3 className="text-lg font-bold">DIEGO GARCÍA</h3>
-                  <Button className="text-sm cursor-pointer" onClick={openModal}>Vamos a diseñarlo</Button>
+
+                  <h3 className="text-lg font-bold">
+                    DIEGO GARCÍA
+                  </h3>
+
+                  <Button
+                    className="text-sm cursor-pointer"
+                    onClick={openModal}
+                  >
+                    Vamos a diseñarlo
+                  </Button>
                 </div>
               </div>
             </div>
@@ -274,7 +332,10 @@ export default function Header() {
         </div>
       </header>
 
-      <ModalForm isOpen={isModalOpen} onClose={closeModal} />
+      <ModalForm
+        isOpen={isModalOpen}
+        onClose={closeModal}
+      />
     </>
   );
 }
