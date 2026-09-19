@@ -143,7 +143,7 @@ export default function HeaderScene() {
         frameloop="always"
         resize={{ scroll: false }}
         camera={{ position: [0, 0, 7], fov: 45 }}
-        dpr={isMobile ? 1 : [1, 1.5]}
+        dpr={isMobile ? 1.5 : [1, 1.5]}
         gl={{
           antialias: false,
           powerPreference: "high-performance",
