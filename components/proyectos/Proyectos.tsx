@@ -27,6 +27,14 @@ export default function Proyectos() {
        logo: "/img/logo-intera.png",
        tag: "MANTENIMIENTO",
        url: "/proyectos/centro-interactua"
+     },
+     {
+       title: "PRUEBA TÉCNICA",
+       subtitle: "Diseño UI/UX | Ecommerce",
+       tag: "PRUEBA",
+       image: "/img/img-pruebatec.jpg",
+       logo: "/img/LogoPplWhite.svg",
+       url: "/proyectos/prueba-tecnica"
      }
   ];
 

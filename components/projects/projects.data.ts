@@ -20,6 +20,7 @@ export interface Project {
   heroImage: string;
 
   website?: string;
+  figmaUrl?: string;
 
   categories: ProjectCategory[];
 
@@ -173,6 +174,7 @@ export const PROJECTS: Project[] = [
     heroImage: "/img/projects/interactua/hero.png",
 
     website: "https://centrointeractua.com",
+    figmaUrl: "https://www.figma.com/proto/BYfngecsKvqLx7rQlxVya2/Centro-interact%C3%BAa---web?node-id=7-77&p=f&t=Ff9319Ec0zotvD7S-1&scaling=scale-down-width&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=7%3A77&show-proto-sidebar=1",
 
     categories: [
       {
@@ -219,4 +221,58 @@ export const PROJECTS: Project[] = [
       },
     ],
   },
+
+ {
+  id: "prueba-tecnica",
+  slug: "prueba-tecnica",
+
+  type: "Web",
+  title: "PRUEBA TÉCNICA",
+
+  shortDescription:
+    "Propuesta UX/UI para un e-commerce de calzado con compra de pares asimétricos.",
+
+  thumbnail: "/img/projects/prueba-tecnica/thumbnail.svg",
+  heroImage: "/img/projects/prueba-tecnica/hero.png",
+
+  figmaUrl: "https://www.figma.com/proto/BYfngecsKvqLx7rQlxVya2/Dise%C3%B1os---web?node-id=241-4347&p=f&t=jYEm8L3614ggKf0O-1&scaling=min-zoom&content-scaling=fixed&page-id=127%3A2225&starting-point-node-id=241%3A4347&show-proto-sidebar=1",
+
+  categories: [
+    {
+      title: "Design",
+      items: [
+        "UX/UI",
+        "E-commerce",
+        "Interaction Design",
+      ],
+    },
+  ],
+
+  sections: [
+    {
+      title: "Problema",
+
+      text: [
+        "La prueba planteaba diseñar una experiencia de e-commerce para una línea de calzado que permite configurar cada pie de forma independiente.",
+
+        "El principal reto era hacer comprensible este modelo de compra sin recurrir a los patrones habituales de un e-commerce, evitando confusiones durante la selección, el carrito y el proceso de compra.",
+      ],
+
+      images: [
+        "/img/projects/prueba-tecnica/design-01.jpg",
+        "/img/projects/prueba-tecnica/design-02.jpg",
+      ],
+    },
+    {
+      title: "Solución",
+
+      text: [
+        "Diseñé un configurador guiado que permite seleccionar categoría, modelo, color y talla para cada pie, manteniendo siempre una referencia visual de la selección.",
+
+        "La experiencia se completa con mensajes de prevención de errores, información contextual sobre el producto y un carrito diseñado para hacer especialmente clara la compra de pares diferentes.",
+      ],
+    },
+  ],
+},
+  
 ];
